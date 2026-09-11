@@ -30,49 +30,58 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-rule bg-paper/95 backdrop-blur-sm">
-      <div className="u-wrap flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
-        <Wordmark />
+    /*
+      The blur lives on the inner bar, not on <header>. backdrop-filter creates
+      a containing block for fixed-position descendants, so a blurred header
+      would position the mobile panel below against the 4rem bar instead of the
+      viewport — top-16 and bottom-0 inside a 4rem box collapse it to zero
+      height, and the menu opens onto nothing.
+    */
+    <header className="sticky top-0 z-50">
+      <div className="border-b border-rule bg-paper/95 backdrop-blur-sm">
+        <div className="u-wrap flex h-16 items-center justify-between gap-6 md:h-[4.5rem]">
+          <Wordmark />
 
-        <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
-          {nav.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`text-[0.9375rem] transition-colors ${
-                  active ? "text-ink" : "text-slate hover:text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+          <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
+            {nav.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`text-[0.9375rem] transition-colors ${
+                    active ? "text-ink" : "text-slate hover:text-ink"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
 
-        <div className="flex items-center gap-3">
-          <PhoneLink
-            location="header"
-            className="hidden text-[0.9375rem] text-ink underline decoration-mist underline-offset-4 hover:decoration-ink md:inline"
-          />
-          <Link
-            href="/book"
-            onClick={() => track("book_ride_clicked", { location: "header" })}
-            className="btn btn-primary hidden min-h-[2.75rem] px-5 text-sm sm:inline-flex"
-          >
-            Book a ride
-          </Link>
-          <button
-            type="button"
-            className="btn btn-outline min-h-[2.75rem] px-4 text-sm lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? "Close" : "Menu"}
-          </button>
+          <div className="flex items-center gap-3">
+            <PhoneLink
+              location="header"
+              className="hidden text-[0.9375rem] text-ink underline decoration-mist underline-offset-4 hover:decoration-ink md:inline"
+            />
+            <Link
+              href="/book"
+              onClick={() => track("book_ride_clicked", { location: "header" })}
+              className="btn btn-primary hidden min-h-[2.75rem] px-5 text-sm sm:inline-flex"
+            >
+              Book a ride
+            </Link>
+            <button
+              type="button"
+              className="btn btn-outline min-h-[2.75rem] px-4 text-sm lg:hidden"
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? "Close" : "Menu"}
+            </button>
+          </div>
         </div>
       </div>
 
