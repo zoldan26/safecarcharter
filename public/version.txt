@@ -1,5 +1,10 @@
-Chartered Car — build 7
-Includes: Columbus skyline hero, real fleet photography, fixed hero scrim,
-fixed mobile menu, patched Next.js (15.1.9).
+Chartered Car — build 8
 
-Visit /version.txt on the live site to confirm which build is deployed.
+Fixed in this build:
+- Menu button appeared on desktop alongside the full navigation, and did
+  nothing when clicked. Custom CSS classes were unlayered, which silently
+  overrode every Tailwind utility applied to them, including lg:hidden.
+  All custom CSS now lives in @layer base / @layer components.
+
+Also includes: Columbus skyline hero, fleet photography, fixed hero scrim,
+fixed mobile menu panel, patched Next.js (15.1.9).
