@@ -1,0 +1,5 @@
+Chartered Car — build 7
+Includes: Columbus skyline hero, real fleet photography, fixed hero scrim,
+fixed mobile menu, patched Next.js (15.1.9).
+
+Visit /version.txt on the live site to confirm which build is deployed.
