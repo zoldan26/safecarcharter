@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ImageSlot } from "@/components/site/ImageSlot";
 import { PageHeader } from "@/components/site/PageHeader";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { JsonLd } from "@/components/site/JsonLd";
@@ -26,6 +27,16 @@ export default function AboutPage() {
         lede="A Columbus black car service built around one idea: the car should be the least eventful part of your day."
         trail={trail}
       />
+
+      <div className="u-wrap">
+        <ImageSlot
+          src="/arrival.jpg"
+          alt="A chauffeur holding the rear door open for an arriving passenger"
+          tone="dark"
+          className="aspect-[16/9] w-full md:aspect-[21/8]"
+          sizes="(max-width: 1248px) 100vw, 1248px"
+        />
+      </div>
 
       <div className="u-wrap section-tight grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
         <div className="u-measure-wide grid gap-5 leading-relaxed text-graphite">

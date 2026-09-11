@@ -10,7 +10,16 @@ import Image from "next/image";
  *
  * Drop files into /public and set the `image` field in lib/fleet.ts, or pass a
  * src directly, to replace a panel with the real thing.
+ *
+ * Positioning: the wrapper is `relative` by default, because next/image with
+ * `fill` needs a positioned ancestor. A caller that needs the slot positioned
+ * some other way — a full-bleed hero background, for instance — passes its own
+ * position class and we step aside. Emitting both would be a silent bug:
+ * Tailwind orders `.absolute` before `.relative`, so `relative` would win on
+ * source order, the box would collapse to zero height, and the image would
+ * simply not appear.
  */
+const POSITIONED = /(^|\s)(absolute|fixed|sticky|static)(\s|$)/;
 export function ImageSlot({
   src,
   alt,
@@ -28,9 +37,11 @@ export function ImageSlot({
   sizes?: string;
   label?: string;
 }) {
+  const position = POSITIONED.test(className) ? "" : "relative";
+
   if (src) {
     return (
-      <div className={`relative overflow-hidden ${className}`}>
+      <div className={`${position} overflow-hidden ${className}`}>
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       </div>
     );
@@ -41,7 +52,7 @@ export function ImageSlot({
     <div
       role="img"
       aria-label={alt}
-      className={`relative overflow-hidden ${dark ? "bg-carbon" : "bg-bone"} ${className}`}
+      className={`${position} overflow-hidden ${dark ? "bg-carbon" : "bg-bone"} ${className}`}
     >
       <div
         aria-hidden

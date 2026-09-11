@@ -1,30 +1,47 @@
 import Link from "next/link";
 import { HeroBooking } from "./HeroBooking";
-import { ImageSlot } from "@/components/site/ImageSlot";
 import { PhoneLink } from "@/components/site/PhoneLink";
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-ink text-paper">
-      {/* Replace /public/hero.jpg to change this. Wide crop: the subject sits
-          centre-frame so the cover-crop holds at phone aspect ratios. */}
-      <ImageSlot
-        src="/hero.jpg"
-        alt="A chauffeur holding the rear door of a black SUV open for an arriving passenger"
-        tone="dark"
-        priority
-        sizes="100vw"
-        className="absolute inset-0 -z-10 h-full w-full"
-      />
-      {/* Two overlays: a flat scrim on phones, where the crop is tight and the
-          headline sits directly over the vehicle, and a left-to-right gradient
-          from large screens up, which lets the photograph carry the right side. */}
+      {/* eslint-disable-next-line @next/next/no-head-element */}
+      <link rel="preload" as="image" href="/hero.jpg" />
+      {/*
+        Backdrop: downtown Columbus at dusk, desaturated so it reads as tone
+        behind the headline rather than competing with it. Replace
+        /public/hero.jpg to change it.
+
+        This is a plain CSS background rather than next/image on purpose. A
+        fill image depends on its wrapper having a resolved height, and a
+        negative z-index depends on the stacking context behaving — two ways
+        for a hero to silently render as a black box. background-size:cover on
+        an inset-0 element has neither dependency. The file is preloaded above
+        so it still paints early.
+      */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[rgba(10,11,12,.78)] lg:bg-[linear-gradient(to_right,rgba(10,11,12,.92)_0%,rgba(10,11,12,.74)_46%,rgba(10,11,12,.34)_100%)]"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero.jpg')" }}
+      />
+      {/*
+        Scrims, as two mutually exclusive elements rather than one element with
+        a responsive variant. That matters: a flat scrim compiles to
+        background-color and a gradient compiles to background-image, so a
+        `lg:` variant does NOT replace the base — the two stack and multiply.
+        Reading them as "88% at the left" when they are really "88% over 72%"
+        is how a photograph ends up invisible under near-opaque black.
+      */}
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 bg-[rgba(10,11,12,.72)] lg:hidden"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 z-0 hidden lg:block lg:bg-[linear-gradient(to_right,rgba(10,11,12,.88)_0%,rgba(10,11,12,.72)_45%,rgba(10,11,12,.42)_100%)]"
       />
 
-      <div className="u-wrap grid gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_26rem] lg:items-center lg:gap-16 lg:py-24">
+      <div className="u-wrap relative z-10 grid gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_26rem] lg:items-center lg:gap-16 lg:py-24">
         <div className="hero-rise">
           <p className="text-[0.875rem] text-paper/55">Columbus, Ohio</p>
           <h1 className="mt-4 text-[var(--text-h1)]">
