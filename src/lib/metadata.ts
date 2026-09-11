@@ -26,13 +26,13 @@ export function pageMetadata(opts: {
       siteName: site.name,
       locale: "en_US",
       type: "website",
-      images: [{ url: abs("/og.png"), width: 1200, height: 630, alt: site.tagline }],
+      images: [{ url: abs("/og.jpg"), width: 1200, height: 630, alt: site.tagline }],
     },
     twitter: {
       card: "summary_large_image",
       title: opts.title,
       description: opts.description,
-      images: [abs("/og.png")],
+      images: [abs("/og.jpg")],
     },
   };
 }

@@ -22,6 +22,7 @@
   --color-graphite: #44403b;   /* secondary text                               */
   --color-slate: #77736d;      /* muted text, labels                           */
   --color-mist: #c6c2ba;       /* disabled state, underline decoration         */
+  --color-carbon: #17181a;     /* photo placeholder panels                      */
 
   /* Type. One family throughout; weight and tracking do the work. Archivo is
      self-hosted by the import in layout.tsx. The platform stack behind it is

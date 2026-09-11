@@ -34,13 +34,22 @@ export default function FleetPage() {
             key={v.id}
             className="grid gap-6 border-t border-rule pt-8 md:grid-cols-[22rem_1fr] md:gap-10"
           >
-            <ImageSlot
-              src={v.image}
-              alt={v.name}
-              tone="dark"
-              className="aspect-[16/10] w-full"
-              sizes="(max-width: 768px) 100vw, 22rem"
-            />
+            <div className="grid gap-3">
+              <ImageSlot
+                src={v.image}
+                alt={v.name}
+                tone="dark"
+                className="aspect-[16/10] w-full"
+                sizes="(max-width: 768px) 100vw, 22rem"
+              />
+              <ImageSlot
+                src={v.interiorImage}
+                alt={`Interior of the ${v.name.toLowerCase()}`}
+                tone="dark"
+                className="aspect-[16/10] w-full"
+                sizes="(max-width: 768px) 100vw, 22rem"
+              />
+            </div>
             <div>
               <h2 className="text-[var(--text-h2)]">{v.name}</h2>
               {v.example ? (

@@ -6,19 +6,22 @@ import { PhoneLink } from "@/components/site/PhoneLink";
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-ink text-paper">
-      {/* Photography slot: a black sedan at a downtown Columbus curb.
-          Drop the file in /public and pass src="/hero.jpg" to replace it. */}
+      {/* Replace /public/hero.jpg to change this. Wide crop: the subject sits
+          centre-frame so the cover-crop holds at phone aspect ratios. */}
       <ImageSlot
-        src={null}
-        alt="A black sedan waiting at a downtown Columbus curb"
+        src="/hero.jpg"
+        alt="A chauffeur holding the rear door of a black SUV open for an arriving passenger"
         tone="dark"
         priority
         sizes="100vw"
         className="absolute inset-0 -z-10 h-full w-full"
       />
+      {/* Two overlays: a flat scrim on phones, where the crop is tight and the
+          headline sits directly over the vehicle, and a left-to-right gradient
+          from large screens up, which lets the photograph carry the right side. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(16,17,19,.94),rgba(16,17,19,.72))]"
+        className="absolute inset-0 -z-10 bg-[rgba(10,11,12,.78)] lg:bg-[linear-gradient(to_right,rgba(10,11,12,.92)_0%,rgba(10,11,12,.74)_46%,rgba(10,11,12,.34)_100%)]"
       />
 
       <div className="u-wrap grid gap-10 py-14 md:py-20 lg:grid-cols-[1.05fr_26rem] lg:items-center lg:gap-16 lg:py-24">

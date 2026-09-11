@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/site/PageHeader";
+import { ImageSlot } from "@/components/site/ImageSlot";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/site/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
@@ -45,6 +46,14 @@ export default function CorporatePage() {
             </section>
           ))}
         </div>
+
+        <ImageSlot
+          src="/corporate.jpg"
+          alt="A driver holding a sedan door for an executive outside a downtown office"
+          tone="dark"
+          className="mt-10 aspect-[16/9] w-full md:aspect-[21/9]"
+          sizes="(max-width: 1248px) 100vw, 1248px"
+        />
 
         <div className="mt-14 grid gap-10 border-t border-rule pt-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>

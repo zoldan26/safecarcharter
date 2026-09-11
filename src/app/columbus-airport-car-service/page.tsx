@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { FaqSection } from "@/components/home/FaqSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import { ImageSlot } from "@/components/site/ImageSlot";
 import { JsonLd } from "@/components/site/JsonLd";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/metadata";
@@ -79,6 +80,14 @@ export default function AirportPage() {
             Get a quote
           </Link>
         </div>
+
+        <ImageSlot
+          src="/airport.jpg"
+          alt="A chauffeur loading luggage for travellers at airport arrivals"
+          tone="dark"
+          className="mt-10 aspect-[16/9] w-full md:aspect-[21/9]"
+          sizes="(max-width: 1248px) 100vw, 1248px"
+        />
 
         <div className="mt-12 grid gap-px border border-rule bg-rule sm:grid-cols-2">
           {blocks.map((b) => (
